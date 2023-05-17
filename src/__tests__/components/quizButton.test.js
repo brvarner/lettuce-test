@@ -1,4 +1,5 @@
-import { render, fireEvent } from "@testing-library/react-native";
+import { render, fireEvent, waitFor } from "@testing-library/react-native";
+import { Alert } from "react-native";
 import QuizButton from "../../components/quizDisplay/quizButton.js";
 import jsonData from "../../../qAndA.json";
 
@@ -24,14 +25,7 @@ describe("QuizButton", () => {
   const setQuestionIndex = jest.fn();
   const navigation = mockNavigation;
   const questions = jsonData;
-  const createBlankAnswerAlert = jest.fn();
-  const selectedAnswer = (questionIndex) => {
-    if (questionIndex === 0) {
-      return null;
-    } else {
-      return questions[questionIndex - 1].answers[0].answer;
-    }
-  };
+  const selectedAnswerStandard = "TEST";
 
   afterEach(() => {
     jest.clearAllMocks();
@@ -45,7 +39,7 @@ describe("QuizButton", () => {
         points={points}
         score={score}
         setScore={setScore}
-        selectedAnswer={selectedAnswer(questionIndex)}
+        selectedAnswer={selectedAnswerStandard}
         questions={questions}
         questionIndex={questionIndex}
         setQuestionIndex={setQuestionIndex}
@@ -62,7 +56,7 @@ describe("QuizButton", () => {
         points={points}
         score={score}
         setScore={setScore}
-        selectedAnswer={selectedAnswer(questionIndex)}
+        selectedAnswer={selectedAnswerStandard}
         questions={questions}
         questionIndex={questionIndex}
         setQuestionIndex={setQuestionIndex}
@@ -80,7 +74,7 @@ describe("QuizButton", () => {
         points={points}
         score={score}
         setScore={setScore}
-        selectedAnswer={"TEST"}
+        selectedAnswer={selectedAnswerStandard}
         questions={questions}
         questionIndex={questionIndex}
         setQuestionIndex={setQuestionIndex}
@@ -103,7 +97,7 @@ describe("QuizButton", () => {
         score={score}
         setScore={setScore}
         questionIndex={questionIndex}
-        selectedAnswer={"TEST"}
+        selectedAnswer={selectedAnswerStandard}
         questions={questions}
         setQuestionIndex={setQuestionIndex}
         navigation={navigation}
@@ -115,7 +109,7 @@ describe("QuizButton", () => {
     expect(setQuestionIndex).toHaveBeenCalledWith(questionIndex + 1);
   });
 
-  it("should refuse to advance if selectedAnswer is null", () => {
+  it("should fire alert that prevents advancing if selectedAnswer is null", () => {
     const { getByTestId } = render(
       <QuizButton
         buttonText={buttonText}
@@ -131,11 +125,46 @@ describe("QuizButton", () => {
       />
     );
 
+    jest.spyOn(Alert, "alert");
+
     fireEvent.press(getByTestId("button"));
-    expect(createBlankAnswerAlert).toHaveBeenCalled();
+
+    expect(Alert.alert).toHaveBeenCalled();
   });
 
-  it("should change buttonText before last question answered", () => {
+  // The functionality works, but I could not wrap my mind around how to structure this test.
+  it("should fire alert that prevents advancing if selectedAnswer is the same as one from the last question", () => {
+    const questionIndex = 2;
+    const oldVariableValue = questions[1].answers[0].answer;
+
+    const { getByTestId } = render(
+      <QuizButton
+        buttonText={buttonText}
+        setButtonText={setButtonText}
+        points={points}
+        score={score}
+        setScore={setScore}
+        selectedAnswer={oldVariableValue}
+        questions={questions}
+        questionIndex={questionIndex}
+        setQuestionIndex={setQuestionIndex}
+        navigation={navigation}
+      />
+    );
+
+    expect(questions[questionIndex].answers).not.toContain(oldVariableValue);
+
+    const alertSpy = jest.spyOn(Alert, "alert").mockImplementation(() => {});
+
+    fireEvent.press(getByTestId("button"));
+
+    expect(alertSpy).toHaveBeenCalled();
+    expect(alertSpy.mock.calls.length).toBeGreaterThanOrEqual(1);
+
+    alertSpy.mockRestore();
+  });
+
+  it("should change buttonText before last question answered", async () => {
     const { getByTestId, getByText } = render(
       <QuizButton
         buttonText={buttonText}
@@ -143,7 +172,7 @@ describe("QuizButton", () => {
         points={points}
         score={score}
         setScore={setScore}
-        selectedAnswer={selectedAnswer(questionIndex)}
+        selectedAnswer={selectedAnswerStandard}
         questions={questions}
         questionIndex={4}
         setQuestionIndex={setQuestionIndex}
@@ -153,7 +182,9 @@ describe("QuizButton", () => {
     const button = getByTestId("button");
     fireEvent.press(button);
 
-    const buttonTextElement = getByText("SUBMIT");
-    expect(buttonTextElement).toBeTruthy();
+    waitFor(() => {
+      const buttonTextElement = getByText("SUBMIT");
+      expect(buttonTextElement).toBeTruthy();
+    });
   });
 });

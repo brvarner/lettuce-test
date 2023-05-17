@@ -15,7 +15,6 @@ export default function QuizButton({
 }) {
   const [quizComplete, setQuizComplete] = useState(false);
   const previousQuestion = questions[questionIndex - 1];
-  console.log({ previousQuestion });
 
   // If the quiz is complete, we take the final tallied score to the endScreen.
   useEffect(() => {
@@ -69,8 +68,6 @@ export default function QuizButton({
     }
   };
 
-  console.log({ score });
-
   return (
     <TouchableOpacity
       testID="button"
@@ -79,7 +76,15 @@ export default function QuizButton({
         quizContinue();
       }}
     >
-      <Text style={{ fontFamily: "Poppins-SemiBold", fontSize: 13, letterSpacing: 2 }}>{buttonText}</Text>
+      <Text
+        style={{
+          fontFamily: "Poppins-SemiBold",
+          fontSize: 13,
+          letterSpacing: 2,
+        }}
+      >
+        {buttonText}
+      </Text>
     </TouchableOpacity>
   );
 }
