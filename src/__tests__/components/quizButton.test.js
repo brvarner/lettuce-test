@@ -175,7 +175,7 @@ describe("QuizButton", () => {
     const button = getByTestId("button");
     fireEvent.press(button);
 
-    waitFor(() => {
+    await waitFor(() => {
       const buttonTextElement = getByText("SUBMIT");
       expect(buttonTextElement).toBeTruthy();
     });
