@@ -5,7 +5,7 @@ Hello! Here's my attempt at the Mobile Developer coding challenge.
 I built the project in React Native using Jest to test, with all of the questions and their
 answers stored in a JSON file at the root of the project.
 
-I encountered an error that I could never find any information on besides possible dependency mismatches, but if you see an error that begins with: <span style="color:yellow">A worker process has failed to exit gracefully and has been force exited.</span>, know that I've tried everything to get it to disappear.
+I encountered an error that I could never find any information on besides possible dependency mismatches, but if you see an error that begins with: <span style="color:yellow">A worker process has failed to exit gracefully and has been force exited.</span> , know that I've tried everything to get it to disappear.
 
 Without further ado, here are the setup instructions.
 
