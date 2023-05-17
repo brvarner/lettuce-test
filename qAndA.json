@@ -1,0 +1,134 @@
+[
+  {
+    "id": 1,
+    "question": "Pick A City You Would Like To Jet Off To",
+    "answers": [
+      {
+        "answer": "Tokyo",
+        "points": 2
+      },
+      {
+        "answer": "Paris",
+        "points": 4
+      },
+      {
+        "answer": "Los Angeles",
+        "points": 1
+      },
+      {
+        "answer": "Nashville",
+        "points": 3
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "question": "Pick a Netflix show to binge watch",
+    "answers": [
+      {
+        "answer": "Stranger Things",
+        "points": 2
+      },
+      {
+        "answer": "The Crown",
+        "points": 4
+      },
+      {
+        "answer": "House of Cards",
+        "points": 1
+      },
+      {
+        "answer": "Wednesday",
+        "points": 3
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "question": "What is the first thing you reach for in the morning?",
+    "answers": [
+      {
+        "answer": "coffee",
+        "points": 1
+      },
+      {
+        "answer": "phone",
+        "points": 4
+      },
+      {
+        "answer": "glasses",
+        "points": 2
+      },
+      {
+        "answer": "TV remote",
+        "points": 3
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "question": "If you could be any animal what would you pick?",
+    "answers": [
+      {
+        "answer": "eagle",
+        "points": 1
+      },
+      {
+        "answer": "dog",
+        "points": 3
+      },
+      {
+        "answer": "deer",
+        "points": 4
+      },
+      {
+        "answer": "monkey",
+        "points": 2
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "question": "Pick a superpower",
+    "answers": [
+      {
+        "answer": "invisibility",
+        "points": 3
+      },
+      {
+        "answer": "mind reading",
+        "points": 4
+      },
+      {
+        "answer": "telekinesis",
+        "points": 1
+      },
+      {
+        "answer": "flight",
+        "points": 2
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "question": "If you were to write a book about your life, what genre would it be?",
+    "answers": [
+      {
+        "answer": "romance",
+        "points": 4
+      },
+      {
+        "answer": "thriller",
+        "points": 2
+      },
+      {
+        "answer": "comedy",
+        "points": 3
+      },
+      {
+        "answer": "adventure",
+        "points": 1
+      }
+    ]
+  }
+]
