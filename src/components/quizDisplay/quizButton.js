@@ -73,16 +73,13 @@ export default function QuizButton({
       testID="button"
       style={styles.button}
       onPress={() => {
+        console.log("clicked");
+        console.log({ buttonText });
+        console.log({ questionIndex });
         quizContinue();
       }}
     >
-      <Text
-        style={{
-          fontFamily: "Poppins-SemiBold",
-          fontSize: 13,
-          letterSpacing: 2,
-        }}
-      >
+      <Text testID="button-text" style={styles.buttonText}>
         {buttonText}
       </Text>
     </TouchableOpacity>
@@ -101,5 +98,10 @@ const styles = StyleSheet.create({
     position: "absolute",
     alignSelf: "center",
     marginTop: 330,
+  },
+  buttonText: {
+    fontFamily: "Poppins-SemiBold",
+    fontSize: 13,
+    letterSpacing: 2,
   },
 });

@@ -102,7 +102,6 @@ describe("QuizQAndA", () => {
 
     questions[questionIndex].answers.forEach(async (answer, index) => {
       const answerButton = getByTestId(`radio-button-${index}`);
-      const newPoints = answer.points;
 
       expect(points).toBe(0);
 

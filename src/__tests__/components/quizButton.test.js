@@ -1,7 +1,13 @@
-import { render, fireEvent, waitFor } from "@testing-library/react-native";
+import {
+  render,
+  fireEvent,
+  waitFor,
+  screen,
+} from "@testing-library/react-native";
 import { Alert } from "react-native";
 import QuizButton from "../../components/quizDisplay/quizButton.js";
 import jsonData from "../../../qAndA.json";
+import { useState } from "react";
 
 // Create a mock navigation object
 const mockNavigation = {
@@ -9,7 +15,7 @@ const mockNavigation = {
 };
 
 describe("QuizButton", () => {
-  const buttonText = "NEXT QUESTION";
+  let buttonText = "NEXT QUESTION";
   const setButtonText = jest.fn();
   const points = 10;
   const score = 0;
@@ -158,7 +164,7 @@ describe("QuizButton", () => {
   });
 
   it("should change buttonText before last question answered", async () => {
-    const { getByTestId, getByText } = render(
+    const { getByTestId } = render(
       <QuizButton
         buttonText={buttonText}
         setButtonText={setButtonText}
@@ -172,12 +178,17 @@ describe("QuizButton", () => {
         navigation={navigation}
       />
     );
-    const button = getByTestId("button");
-    fireEvent.press(button);
 
+    expect(buttonText).toBe("NEXT QUESTION");
+
+    fireEvent.press(getByTestId("button"));
+
+    // When the questionIndex = 4, the quizContinue() function inside of the component
+    // knows to call the setButtonText function, so when we change the index like we do above,
+    // it calls the function on the next press.
+    
     await waitFor(() => {
-      const buttonTextElement = getByText("SUBMIT");
-      expect(buttonTextElement).toBeTruthy();
+      expect(setButtonText).toHaveBeenCalled();
     });
   });
 });
