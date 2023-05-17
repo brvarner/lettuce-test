@@ -8,13 +8,6 @@ const mockNavigation = {
   navigate: jest.fn(),
 };
 
-// I was having trouble building a test for navigating with params
-// to the EndScreen after the quiz is complete, so instead
-// I wrote a test for the EndScreen to ensure it always received a score.
-
-// My logic was that if the EndScreen is rendering without a score parameter,
-// as the only way to navigate to that screen is with the QuizButton,
-// then the QuizButton has not done its job.
 describe("QuizButton", () => {
   const buttonText = "NEXT QUESTION";
   const setButtonText = jest.fn();
